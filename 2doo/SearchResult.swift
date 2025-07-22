@@ -17,5 +17,7 @@ struct Quotes: Decodable {
     
     var q : String?
     var a : String?
+    var c : String?
+    var h : String?
     
 }
