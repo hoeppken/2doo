@@ -11,6 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    var service = DataService()
 
     var body: some View {
         NavigationSplitView {
@@ -36,6 +37,13 @@ struct ContentView: View {
             }
         } detail: {
             Text("Select an item")
+        }
+        Button("Search Quotes") {
+            //add funtion
+            Task {
+                let result = await service.search()
+            }
+            
         }
     }
 

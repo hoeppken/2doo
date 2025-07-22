@@ -10,41 +10,32 @@ import SwiftData
 
 struct DataService {
     
-    //let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String
-    let apiKey: String?
-    
+    //no need of apikey so:
+    //start with the func
     func search () async -> [Quotes] {
         
-        //check if api exists
-        
-        guard apiKey != nil else {
+        //check if url exists , else just return
+        guard let url = URL(string: "https://zenquotes.io/api/quotes") else {
             return [Quotes]()
         }
         
-        //create url
-        if let url = URL(string: "https://zenquotes.io/api/[mode]/?option1=value") {
+        //now comes the request and the add value for json
         
-            var request = URLRequest(url: url)
-            request.addValue("Bearer \(apiKey!)", forHTTPHeaderField: "Authorization")
-            request.addValue("application/json", forHTTPHeaderField: "accept")
+        var request = URLRequest(url: url)
+        request.addValue("application/json", forHTTPHeaderField: "accept")
+        
+        do {
             
-            do {
-                
-                let (data, response) = try await URLSession.shared.data(for: request)
-                print(String(data: data, encoding: .utf8)!)
-                
-                //parse json
-                let decoder = JSONDecoder()
-                let result =  try decoder.decode(SearchResult.self, from: data)
-                return result.quotes
-                
-            } catch {
-                print(error)
-                
-            }
+            let (data, response) = try await URLSession.shared.data(for: request)
+            print(String(data: data, encoding: .utf8)!)
             
+            let decoder = JSONDecoder()
+            let result = try decoder.decode([Quotes].self, from: data)
+            return result
+        }catch {
+            print(error)
         }
         return [Quotes]()
-        
     }
+    
 }
