@@ -35,16 +35,16 @@ struct ContentView: View {
                     }
                 }
             }
+            NavigationLink(destination: QuotesView()) {
+                Text("Show Quotes").buttonStyle(.bordered)
+                }
+            
         } detail: {
             Text("Select an item")
         }
-        Button("Search Quotes") {
-            //add funtion
-            Task {
-                let result = await service.search()
-            }
+       
             
-        }
+        
     }
 
     private func addItem() {

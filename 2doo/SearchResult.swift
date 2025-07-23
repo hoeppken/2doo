@@ -7,14 +7,10 @@
 
 import Foundation
 
-struct SearchResult: Decodable {
-    
-    var quotes = [Quotes]()
-    
-}
 
-struct Quotes: Decodable {
+struct Quotes: Decodable, Identifiable {
     
+    var id = UUID()
     var q : String?
     var a : String?
     var c : String?
