@@ -30,8 +30,15 @@ struct DataService {
             print(String(data: data, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
-            let result = try decoder.decode([Quotes].self, from: data)
-            return result
+            let decoded = try decoder.decode([Quotes].self, from: data)
+            let quotesWithID = decoded.map { quote in
+                
+                var q = quote
+                q.id = UUID()
+                return q
+                
+            }
+            return quotesWithID
         }catch {
             print(error)
         }

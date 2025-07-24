@@ -16,4 +16,11 @@ struct Quotes: Decodable, Identifiable {
     var c : String?
     var h : String?
     
+    private enum CodingKeys : String, CodingKey {
+        case q = "q"
+        case a = "a"
+        case c = "c"
+        case h = "h"
+    }
+    
 }
