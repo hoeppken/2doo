@@ -9,10 +9,11 @@ import Foundation
 import SwiftData
 
 @Model
-final class Item {
-    var timestamp: Date
+class ToDo {
+    @Attribute(.unique) var id: String
+    var toDoText: String = ""
     
-    init(timestamp: Date) {
-        self.timestamp = timestamp
+    init() {
+        id = UUID().uuidString
     }
 }

@@ -10,60 +10,55 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-    var service = DataService()
-
+    @Query private var toDos: [ToDo]
+    @State private var selectedToDo : ToDo?
+    //var service = DataService()
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            NavigationLink(destination: QuotesView()) {
-                Text("Show Quotes").buttonStyle(.bordered)
-                }
-            
-        } detail: {
-            Text("Select an item")
-        }
-       
-            
         
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        NavigationStack {
+            
+            VStack (alignment: .leading){
+                
+                Text("Tasks")
+                    .font(Font.largeTitle)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            NavigationLink(destination: QuotesView()) {
+                                Image(systemName: "plus")
+                            }
+                        }
+                    }
+                    .bold()
+                    
+                
+                ScrollView {
+                    
+                    ForEach(toDos) { t in
+                    
+                        CardView(toDo: t)
+                            .onTapGesture {
+                                selectedToDo = t
+                            
+                        }
+                 
+                    
+                     }
+                    
+                    
+                    
+                }
+                
             }
         }
+        
+       /*NavigationLink(destination: QuotesView()) {
+            Text("Show Quotes").buttonStyle(.bordered)
+        }*/
+        
+        
+   // #Preview {
+     //   ContentView(tasks[]())
+  //      }
     }
-}
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
