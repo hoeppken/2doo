@@ -12,7 +12,7 @@ import SwiftData
 struct _dooApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            ToDo.self,
+            TaskType.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

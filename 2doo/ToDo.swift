@@ -9,11 +9,18 @@ import Foundation
 import SwiftData
 
 @Model
-class ToDo {
+class TaskType {
     @Attribute(.unique) var id: String
-    var toDoText: String = ""
+    var taskText: String = ""
+    var toDo = [ToDo]()
     
     init() {
         id = UUID().uuidString
     }
+}
+
+struct ToDo: Identifiable, Decodable {
+    var id: UUID = UUID()
+    var text: String
+    var isDone: Bool = false
 }
