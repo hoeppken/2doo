@@ -12,7 +12,7 @@ struct AddEditView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
-    var listItem : ToDo
+    //var listItem : ToDo
     var isEditMode: Bool
     @State var toDo : ToDo?
     @State private var toDoText : String = ""

@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var toDos: [TaskType]
+    @Query private var toDos: [ToDo]
     @State var selectedTask : TaskType?
     //var service = DataService()
     
@@ -24,7 +24,7 @@ struct ContentView: View {
                     .font(Font.largeTitle)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: AddEditView()) {
+                            NavigationLink(destination: AddEditView(isEditMode: false)) {
                                 Image(systemName: "plus")
                             }
                         }
@@ -36,9 +36,9 @@ struct ContentView: View {
                     
                     ForEach(toDos) { t in
                     
-                        CardView(toDo: t)
+                        CardView(toDo:t)
                             .onTapGesture {
-                                selectedTask = t
+                                selectedTask = selectedTask
                             
                         }
                  
@@ -62,3 +62,6 @@ struct ContentView: View {
   //      }
     }
 }
+
+
+//as in the app project tracker, you have to add a AddTaskView for the user to entry a new task. This can be then picked in the picker on the add/edit view
