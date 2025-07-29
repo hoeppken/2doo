@@ -24,7 +24,7 @@ struct ContentView: View {
                     .font(Font.largeTitle)
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: AddEditView(isEditMode: false)) {
+                            NavigationLink(destination: AddTaskView()) {
                                 Image(systemName: "plus")
                             }
                         }
@@ -38,7 +38,7 @@ struct ContentView: View {
                     
                         CardView(toDo:t)
                             .onTapGesture {
-                                selectedTask = selectedTask
+                            selectedTask = t
                             
                         }
                  
