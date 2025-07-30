@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct AddEditView: View {
+struct EditView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context

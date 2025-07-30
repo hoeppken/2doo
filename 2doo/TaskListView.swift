@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var toDos: [ToDo]
+    @Query private var toDos: [TaskType]
     @State var selectedTask : TaskType?
     //var service = DataService()
     
@@ -36,7 +36,7 @@ struct ContentView: View {
                     
                     ForEach(toDos) { t in
                     
-                        CardView(toDo:t)
+                        CardView(toDo: t)
                             .onTapGesture {
                             selectedTask = t
                             
