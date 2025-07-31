@@ -8,60 +8,25 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var toDos: [TaskType]
+struct TaskListView: View {
+    
+    @Query private var tasks: [TaskType]
     @State var selectedTask : TaskType?
-    //var service = DataService()
+   
     
     var body: some View {
         
-        NavigationStack {
-            
-            VStack (alignment: .leading){
-                
-                Text("Tasks")
-                    .font(Font.largeTitle)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: AddTaskView()) {
-                                Image(systemName: "plus")
-                            }
-                        }
-                    }
-                    .bold()
-                    
-                
-                ScrollView {
-                    
-                    ForEach(toDos) { t in
-                    
-                        CardView(toDo: t)
-                            .onTapGesture {
-                            selectedTask = t
-                            
-                        }
-                 
-                    
-                     }
-                    
-                    
-                    
-                }
-                
-            }
+        List {
+            Text("Tasks")
+            Text("Tasks")
+            Text("Tasks")
         }
         
-       /*NavigationLink(destination: QuotesView()) {
-            Text("Show Quotes").buttonStyle(.bordered)
-        }*/
-        
-        
-   // #Preview {
-     //   ContentView(tasks[]())
-  //      }
     }
+    
+    
+    //as in the app project tracker, you have to add a AddTaskView for the user to entry a new task. This can be then picked in the picker on the add/edit view
 }
-
-
-//as in the app project tracker, you have to add a AddTaskView for the user to entry a new task. This can be then picked in the picker on the add/edit view
+#Preview {
+    TaskListView()
+}

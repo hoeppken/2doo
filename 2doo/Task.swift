@@ -12,15 +12,11 @@ import SwiftData
 class TaskType {
     @Attribute(.unique) var id: String
     var taskText: String = ""
-    var toDo = [ToDo]()
+    var toDo : [ToDo] = [ToDo]()
     
     init() {
         id = UUID().uuidString
     }
 }
 
-struct ToDo: Identifiable, Decodable {
-    var id: UUID = UUID()
-    var text: String
-    var isDone: Bool = false
-}
+

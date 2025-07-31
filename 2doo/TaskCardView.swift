@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct TaskCardView: View {
     
-    var toDo: ToDo
+
     
     
     
@@ -21,7 +21,7 @@ struct CardView: View {
                 RoundedRectangle (cornerRadius: 15)
                     .shadow(radius: 10, x:0, y:4)
                 VStack {
-                    Text(String("\"")+toDo.toDoText+String("\"")).foregroundStyle(.white)
+                    Text("Some text").foregroundStyle(.white)
                     Spacer()
                    
                 }
@@ -39,5 +39,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(toDo: ToDo())
+    TaskCardView()
 }
