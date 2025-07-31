@@ -16,12 +16,25 @@ struct TaskListView: View {
     
     var body: some View {
         
-        List {
-            Text("Tasks")
-            Text("Tasks")
-            Text("Tasks")
+        NavigationStack {
+            VStack {
+                Text("Task List")
+                    .font(Font.largeTitle.bold())
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink (destination: AddTaskView()) {
+                                Image(systemName: "plus")
+                            }
+                        }
+                    }
+                ScrollView {
+                    TaskCardView()
+                    TaskCardView()
+                    TaskCardView()
+                }.padding()
+                
+            }
         }
-        
     }
     
     
