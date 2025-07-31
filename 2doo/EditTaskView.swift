@@ -12,6 +12,7 @@ struct EditTaskView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
+    var isEditMode: Bool
     
     
     
@@ -22,6 +23,6 @@ struct EditTaskView: View {
     }
 }
     #Preview {
-        EditTaskView()
+        EditTaskView(isEditMode: true)
     }
 

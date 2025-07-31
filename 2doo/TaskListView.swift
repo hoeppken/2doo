@@ -11,7 +11,8 @@ import SwiftData
 struct TaskListView: View {
     
     @Query private var tasks: [TaskType]
-    @State var selectedTask : TaskType?
+    @State private var selectedTask : TaskType?
+    
    
     
     var body: some View {
@@ -28,12 +29,20 @@ struct TaskListView: View {
                         }
                     }
                 ScrollView {
-                    TaskCardView()
-                    TaskCardView()
-                    TaskCardView()
+                    
+                    ForEach(tasks) { t in
+                      
+                        TaskCardView(taski: t).onTapGesture {
+                            selectedTask = t
+                        }
+                        
+                    }
+                    
                 }.padding()
                 
-            }
+            }.navigationDestination(item: $selectedTask) { t in
+                EditTaskView(isEditMode: true)
+        }
         }
     }
     

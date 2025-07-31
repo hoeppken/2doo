@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskCardView: View {
     
 
-    
+    var taski : TaskType
     
     
     var body: some View {
@@ -39,5 +39,5 @@ struct TaskCardView: View {
 }
 
 #Preview {
-    TaskCardView()
+    TaskCardView(taski: TaskType())
 }
