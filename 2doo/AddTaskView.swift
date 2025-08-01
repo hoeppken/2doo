@@ -6,15 +6,48 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddTaskView: View {
-    @State var taskText = ""
+    
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
+    var task : TaskType
+    @State var taskText : String = ""
     
     var body: some View {
+        
         TextField("Task", text: $taskText)
+            .textFieldStyle(.roundedBorder)
+        
+        HStack{
+            
+            Button {
+                
+                task.text = taskText
+                context.insert(task)
+                
+                dismiss()
+                
+            } label: {
+                Text ("Save")
+            }.buttonStyle(.borderedProminent).disabled(taskText.isEmpty)
+            
+            Spacer()
+            
+            Button {
+                //delete quotes
+                
+                context.delete(task)
+                dismiss()
+                
+            } label: {
+                Text ("Delete")
+            }.buttonStyle(.plain).foregroundStyle(.red).disabled(taskText.isEmpty)
+        }
     }
 }
 
 #Preview {
-    AddTaskView()
+    AddTaskView(task: TaskType())
 }

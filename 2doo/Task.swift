@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class TaskType {
     @Attribute(.unique) var id: String
-    var taskText: String = ""
+    var text: String = ""
     var toDo : [ToDo] = [ToDo]()
     
     init() {

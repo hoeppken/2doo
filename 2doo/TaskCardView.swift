@@ -11,6 +11,7 @@ struct TaskCardView: View {
     
 
     var taski : TaskType
+    var taskText : String = ""
     
     
     var body: some View {
@@ -21,11 +22,11 @@ struct TaskCardView: View {
                 RoundedRectangle (cornerRadius: 15)
                     .shadow(radius: 10, x:0, y:4)
                 VStack {
-                    Text("Some text").foregroundStyle(.white)
-                    Spacer()
+                    Text(taski.text).foregroundStyle(.white).font(Font.headline)
+                   
                    
                 }
-                .padding(.top, 50)
+                .padding(.top, 20)
                 .padding(.bottom, 20)
                 
                     

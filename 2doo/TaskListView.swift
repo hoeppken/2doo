@@ -23,7 +23,7 @@ struct TaskListView: View {
                     .font(Font.largeTitle.bold())
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink (destination: AddTaskView()) {
+                            NavigationLink (destination: AddTaskView(task: TaskType())) {
                                 Image(systemName: "plus")
                             }
                         }
