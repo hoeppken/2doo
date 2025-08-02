@@ -41,7 +41,12 @@ struct TaskListView: View {
                 }.padding()
                 
             }.navigationDestination(item: $selectedTask) { t in
-                EditTaskView(isEditMode: true)
+         if TapGesture.self == AnyGesture.self {
+             EditTaskView(isEditMode: true)
+                }else {
+             ToDoListView()
+         }
+                
         }
         }
     }

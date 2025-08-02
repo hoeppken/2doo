@@ -14,9 +14,12 @@ struct ToDoListView: View {
         NavigationStack {
             VStack {
                 List {
-                    Text("Hello, World!")
-                    Text("Hello, World!")
-                    Text("Hello, World!")
+                    HStack {
+                        Text("Hello, World!")
+                        Spacer()
+                        Image(systemName: "checkmark.square")
+                    }
+                    
                 }
             }
         }
