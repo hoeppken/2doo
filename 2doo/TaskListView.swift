@@ -12,6 +12,8 @@ struct TaskListView: View {
     
     @Query private var tasks: [TaskType]
     @State private var selectedTask : TaskType?
+    @State private var isEditMode = false
+    var taskText : String = ""
     
    
     
@@ -31,23 +33,35 @@ struct TaskListView: View {
                 ScrollView {
                     
                     ForEach(tasks) { t in
-                      
-                        TaskCardView(taski: t).onTapGesture {
-                            selectedTask = t
-                        }
-                        
+                        TaskCardView(taski: t)
+                            .simultaneousGesture(
+                                TapGesture()
+                                    .onEnded {
+                                        isEditMode = false
+                                        selectedTask = t
+                                        
+                                    }
+                            )
+                            .simultaneousGesture(
+                                LongPressGesture()
+                                    .onEnded { _ in
+                                        isEditMode = true
+                                        selectedTask = TaskType() // needed to trigger navigationDestination
+                                        selectedTask = t
+                                    }
+                            )
                     }
                     
                 }.padding()
                 
             }.navigationDestination(item: $selectedTask) { t in
-         if TapGesture.self == AnyGesture.self {
-             EditTaskView(isEditMode: true)
-                }else {
-             ToDoListView()
-         }
+                if isEditMode {
+                    EditTaskView(isEditMode: true)
+                } else {
+                    ToDoListView(taski: TaskType(), toDoItems: Double())
+                }
                 
-        }
+            }
         }
     }
     
