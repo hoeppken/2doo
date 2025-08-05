@@ -8,24 +8,31 @@
 import SwiftUI
 import SwiftData
 
-struct AddTaskView: View {
+struct AddEditTaskView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     var task : TaskType
     @State var taskText : String = ""
+    var isEditMode: Bool
     
     var body: some View {
         
         TextField("Task", text: $taskText)
             .textFieldStyle(.roundedBorder)
-        
+            .onAppear {
+                taskText = task.text
+            }
         HStack{
             
             Button {
-                
-                task.text = taskText
-                context.insert(task)
+                if isEditMode {
+                    
+                    task.text = taskText
+                } else {
+                    task.text = taskText
+                    context.insert(task)
+                }
                 
                 dismiss()
                 
@@ -49,5 +56,5 @@ struct AddTaskView: View {
 }
 
 #Preview {
-    AddTaskView(task: TaskType())
+    AddEditTaskView(task: TaskType(), isEditMode: true)
 }

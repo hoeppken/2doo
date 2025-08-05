@@ -25,7 +25,7 @@ struct TaskListView: View {
                     .font(Font.largeTitle.bold())
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink (destination: AddTaskView(task: TaskType())) {
+                            NavigationLink (destination: AddEditTaskView(task: TaskType(), isEditMode: false)) {
                                 Image(systemName: "plus")
                             }
                         }
@@ -46,7 +46,6 @@ struct TaskListView: View {
                                 LongPressGesture()
                                     .onEnded { _ in
                                         isEditMode = true
-                                        selectedTask = TaskType() // needed to trigger navigationDestination
                                         selectedTask = t
                                     }
                             )
@@ -56,7 +55,7 @@ struct TaskListView: View {
                 
             }.navigationDestination(item: $selectedTask) { t in
                 if isEditMode {
-                    EditTaskView(isEditMode: true)
+                    AddEditTaskView(task: t, isEditMode: true)
                 } else {
                     ToDoListView(taski: TaskType(), toDoItems: Double())
                 }
